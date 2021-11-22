@@ -1,4 +1,4 @@
-import SearchField from "./core/DropDownButton";
+import SearchField from "./core/SearchField";
 
 function App() {
   return (

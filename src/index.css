@@ -29,3 +29,8 @@ input {
   width: 35vw;
   max-width: 170px;
 }
+
+.countryFlag {
+  width: 25px;
+  height: 25px;
+}

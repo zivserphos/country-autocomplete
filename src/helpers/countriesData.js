@@ -1,3 +1,4 @@
+import axios from "axios";
 export const countriesData = [
   {
     code: "AF",
@@ -1398,3 +1399,24 @@ export const countriesData = [
     dialling_code: "+263",
   },
 ];
+
+export default async function updateFlags() {
+  const flags = await Getflags();
+  const newCountriesData = countriesData.map((country) => {
+    const updatedFlag = flags.find((flag) => flag.name === country.name);
+    if (updatedFlag) country.flag = updatedFlag.flag;
+    return country;
+  });
+  return newCountriesData;
+}
+
+async function Getflags() {
+  const countriesFlagData = await axios.get(
+    "https://restcountries.com/v3.1/all"
+  );
+  const flags = [];
+  countriesFlagData.data.map((country) => {
+    return flags.push({ name: country.name.common, flag: country.flags.svg });
+  });
+  return flags;
+}
